@@ -17,22 +17,14 @@ class Operations{
 
     add(collection, object){
         return new Promise((resolve, reject)=>{
-            this.exist(collection, object).then((result)=>{
-                if(result["result"] == true)
-                {
-                    resolve({result: false, resone: "object is exist"})
-                }else
-                {
-                    new collection(object).save((err)=>{
-                        if(err)
-                        {
-                            resolve({result: false});
-                        }else{
-                            resolve({result: true});
-                        }
-                    })
-                }
-            })
+                new collection(object).save((err)=>{
+                    if(err)
+                    {
+                        resolve({result: false});
+                    }else{
+                        resolve({result: true});
+                    }
+                })
         })
     }
 
