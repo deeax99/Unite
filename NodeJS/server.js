@@ -31,7 +31,7 @@ express_server.post("/login", (req, res)=>{
             });
         else{
             var hash = validate.Hash128(email+new Date().getMilliseconds);
-            Ovalidate.modify(user, {email: email}, {hash: hash}).then((result)=>{
+            Ovalidate.modify(user, {email: email}, {loged: hash}).then((result)=>{
                 if(result["result"] == false)
                 {
                     res.send({
@@ -45,11 +45,36 @@ express_server.post("/login", (req, res)=>{
                         resone: ""
                     })
                 }
-            })
-            
+            })   
         }
     })
 
+})
+
+
+//this function responsibile for follow and un follow users
+function changefollow(){
+    //todo
+}
+
+express_server.post("/insertPost", (req, res)=>{
+    //todo
+})
+
+express_server.post("/editPost", (req, res)=>{
+    //todo
+})
+
+express_server.post("/follow", (req, res)=>{
+    //todo
+})
+
+express_server.post("/unFollow", (req, res)=>{
+    //todo
+})
+
+express_server.post("/updateSetting", (req, res)=>{
+    //todo
 })
 
 

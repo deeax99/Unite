@@ -17,9 +17,12 @@ module.exports = class
     {
 
     }
+
     Hash128(text)
     {
         return md5(text)
     }
+
+    
 
 }
