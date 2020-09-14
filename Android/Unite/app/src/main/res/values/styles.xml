@@ -20,9 +20,7 @@
 
     </style>
 
-    <style name="SfFont" parent="@android:style/TextAppearance.Small">
-        <item name="android:fontFamily">@font/FontsFree-Net-SFProDisplay-Regular</item>
-    </style>
+
 
     <style name="head2">
 
