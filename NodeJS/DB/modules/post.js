@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const schema = mongoose.schema;
+const schema = mongoose.Schema;
 
 const Schema = new schema({
     numberOfUsers: Number,
@@ -12,5 +12,5 @@ const Schema = new schema({
     state: Boolean,
 })
 
-module.exports = mongoose.model("post", schema);
+module.exports = mongoose.model("post", Schema);
 

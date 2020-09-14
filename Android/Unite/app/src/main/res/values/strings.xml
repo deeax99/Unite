@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Unite</string>
+    <string name="header">
+welcome!
+</string>
+
+    <string name="head2">
+
+Sign in to continue
+</string>
+</resources>

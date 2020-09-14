@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
-const schema = mongoose.schema;
+const schema = mongoose.Schema;
 
 const Schema = new schema({
-    userID: String,
+    userID: [String],
 })
 
 module.exports = mongoose.model("userFollwers", Schema);
-
