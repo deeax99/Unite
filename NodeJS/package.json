@@ -4,7 +4,11 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+<<<<<<< HEAD
+    "body-parser": "^1.19.0",
+=======
     "check-password-strength": "^1.0.12",
+>>>>>>> 41337ac8fac3238acc020f2c7509dfe282a6acc8
     "express": "^4.17.1",
     "md5": "^2.3.0",
     "mongodb": "^3.6.2",

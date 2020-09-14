@@ -3,16 +3,27 @@ const operations =  require("./DB/modify/operations")
 const user = require("./DB/modules/user")
 const post = require('./DB/modules/post')
 const userFollwers = require('./DB/modules/userFollwers')
-const validate = new operations();
+const Ovalidate = new operations();
 const express = require("express");
+const bodyParser = require('body-parser')
 
 var express_server = express();
+express_server.use(bodyParser.urlencoded({ extended: false }));
+
 
 
 express_server.get("/", (req, res)=>{
     res.end("hello cleint");
 })
 
+
+express_server.post("/login", (req, res)=>{
+    email = req.body["email"];
+    password = req.body["password"];
+    Ovalidate.exist(user, {email: email, password: password}).then((result)=>{
+        
+    })
+})
 
 
 //note that by defulte the host is your ip in your router
