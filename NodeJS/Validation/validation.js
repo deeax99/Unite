@@ -8,7 +8,7 @@ module.exports = class
         return emailRegex.test(email)
     }
 
-    PasswordStrength (password)
+    StrongPassword (password)
     {
         return passwordStrength(password).id != 0
     }

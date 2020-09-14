@@ -7,6 +7,7 @@ const Ovalidate = new operations();
 const validate = new (require("./Validation/validation"))();
 const express = require("express");
 const bodyParser = require('body-parser')
+const RegisterFile = require("./DB/Register/Register");
 
 var express_server = express();
 express_server.use(bodyParser.urlencoded({ extended: false }));
@@ -53,11 +54,10 @@ express_server.post("/login", (req, res)=>{
 
 
 //note that by defulte the host is your ip in your router
-const port = 3211;
+const port = 3214;
 express_server.listen(port, ()=>{
     console.log("listening...");
 })
-
 
 setTimeout(() => {
     
@@ -87,3 +87,6 @@ setTimeout(() => {
     // })
 
 }, 1000);
+
+data = {email : "deea1887@yahoo.com" , username : "Deeax99" , password : "test12@flfl" , birthDate : Date.now() };
+console.log(RegisterFile.RegisterDB(data));
