@@ -19,6 +19,7 @@ express_server.get("/", (req, res)=>{
 
 
 express_server.post("/login", (req, res)=>{
+    
     var email = req.body["email"];
     var password = req.body["password"];
     Ovalidate.exist(user, {email: email, password: password}).then((result)=>{
@@ -28,9 +29,26 @@ express_server.post("/login", (req, res)=>{
                 resone: "data not correct or something wrong please try again",
             });
         else{
-            var hash = validate.Hash128
+            var hash = validate.Hash128(email+new Date().getMilliseconds);
+            Ovalidate.modify(user, {email: email}, {hash: hash}).then((result)=>{
+                if(result["result"] == false)
+                {
+                    res.send({
+                        result: false,
+                        resone: "something wrong"
+                    })
+                }else{
+                    res.send({
+                        result: true,
+                        hash: hash,
+                        resone: ""
+                    })
+                }
+            })
+            
         }
     })
+
 })
 
 
