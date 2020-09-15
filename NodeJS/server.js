@@ -52,9 +52,61 @@ express_server.post("/login", (req, res)=>{
 })
 
 
+
 //this function responsibile for follow and un follow users
-function changefollow(){
-    //todo
+function changefollow(email, userToAdd){
+    return new Promise((resolve, reject)=>{
+        Ovalidate.exist(user, userToAdd).then((result)=>{
+            if(result['result'] === false){
+                resolve({
+                    result: false,
+                    resone: 'user to add does not exist',
+                })
+            }else{
+                Ovalidate.get(userFollwers, {email: email}).then((currentFollowers)=>{
+                    if(currentFollowers['result'] === false){
+                        Ovalidate.add(userFollwers, {email: email, followers: [userToAdd.email]}).then((ans)=>{
+                            if(ans['result'] === false){
+                                resolve({
+                                    result: false,
+                                    resone: 'cant create user followers array',
+                                })
+                            }else{
+                                resolve({
+                                    result: true,
+                                    resone: '',
+                                })
+                            }
+                        })
+                    }else{
+                        Ovalidate.get(userFollwers, {email: email}).then((userFollwersObject)=>{
+                            userFollwersObject = userFollwersObject.user;
+                            var findOne = userFollwersObject.followers.indexOf(userToAdd.email);
+                            if(findOne == -1)
+                            {
+                                userFollwersObject.followers.push(userToAdd.email);
+                            }else{
+                                userFollwersObject.followers.splice(findOne, 1);
+                            }
+                            Ovalidate.modify(userFollwers, {email: email}, userFollwersObject).then((ans)=>{
+                                if(ans['result'] === false){
+                                    resolve({
+                                        result: false,
+                                        resone: 'cant modify user followers array',
+                                    })
+                                }else{
+                                    resolve({
+                                        result: true,
+                                        resone: '',
+                                    })
+                                }
+                            })
+                        })
+                    }
+                })
+            }
+        })
+    })
 }
 
 express_server.post("/insertPost", (req, res)=>{
@@ -65,13 +117,26 @@ express_server.post("/editPost", (req, res)=>{
     //todo
 })
 
+
+//this function can change the folloing state
 express_server.post("/follow", (req, res)=>{
-    //todo
+    var email = req.body['email'];
+    var hash = req.body['hash'];
+    var userToAdd = {email: req.body['user']};
+
+    console.log(req.body)
+    Ovalidate.exist(user, {email: email, loged: hash}).then((result)=>{
+        if(result['result'] === false){
+            res.send({
+                result: false,
+                resone: 'you are not loged in',
+            })
+        }else{
+            changefollow(email, userToAdd).then((result)=>res.send(result));
+        }
+    })
 })
 
-express_server.post("/unFollow", (req, res)=>{
-    //todo
-})
 
 express_server.post("/updateSetting", (req, res)=>{
     //todo
@@ -113,5 +178,5 @@ setTimeout(() => {
 
 }, 1000);
 
-data = {email : "deea1887@yahoo.com" , username : "Deeax99" , password : "test12@flfl" , birthDate : Date.now() };
-console.log(RegisterFile.RegisterDB(data));
+// data = {email : "wdasw@yahoo.com" , username : "Deeax99" , password : "test12@flfl" , birthDate : Date.now() };
+// console.log(RegisterFile.RegisterDB(data));

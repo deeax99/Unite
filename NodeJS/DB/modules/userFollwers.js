@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
 const Schema = new schema({
-    userID: [String],
+    email: String,
+    followers: [String],
 })
 
 module.exports = mongoose.model("userFollwers", Schema);

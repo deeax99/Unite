@@ -48,6 +48,25 @@ class Operations{
         })
     }
 
+    get(collection, object){
+        return new Promise((resolve, reject)=>{
+            collection.findOne(object).then((result)=>{
+                if(result === null){
+                    resolve({
+                        result: false,
+                        resone: 'object not exist',
+                    })
+                }else{
+                    resolve({
+                        result: true,
+                        user: result,
+                        resone: '',
+                    })
+                }
+            })
+        })
+    }
+
 }
 
 module.exports = Operations
