@@ -205,11 +205,6 @@ express_server.post('/participants', (req, res)=>{
 
 })
 
-express_server.post("/editPost", (req, res)=>{
-    //todo
-})
-
-
 
 
 //this function can change the folloing state
@@ -237,6 +232,9 @@ express_server.post("/updateSetting", (req, res)=>{
     //todo
 })
 
+express_server.post("/editPost", (req, res)=>{
+    //todo
+})
 
 //note that by defulte the host is your ip in your router
 const port = 3214;

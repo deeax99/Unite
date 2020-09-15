@@ -1,0 +1,52 @@
+post request = {
+
+    email: the user email (String),
+    hash: the hash to auth (String),
+    numberOfUsers: number of required participants for the post (Number),
+    place: place of event (String),
+    date: date of event (String),
+    description: description of the event (String),
+    location: location of event (String),
+
+}
+
+
+login request = {
+
+    email: the user email (String),
+    password: the user password (String),
+
+}
+
+register request = {
+
+    email: the user email (String),
+    password: the user password (String),
+    username: the username (String),
+    birthDate: birthDate (String),
+
+}
+
+request to follow some user = {
+
+    email: the user email (String),
+    user: email for that user you wan to follow (String),
+
+}
+
+
+each response have the result if its true that mean the request is done else you can access the resone
+if the request is ok and you need the content you can access = {
+
+    result: true of false,
+    resone: if there is an error you will have the resone,
+    content: the content of the request if it is done
+
+}
+
+note that the hash that you receve from the login request does not include in the content you can access it
+using hash = {
+    hash: (String)
+} 
+
+
