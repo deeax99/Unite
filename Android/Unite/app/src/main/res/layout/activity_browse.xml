@@ -61,9 +61,16 @@
         app:srcCompat="@drawable/FilterIcon" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="330dp"
-        android:layout_height="6dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="276dp" />
+        android:id="@+id/feedView"
+        android:layout_width="411dp"
+        android:layout_height="510dp"
+        android:layout_marginStart="82dp"
+        android:layout_marginLeft="82dp"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintEnd_toEndOf="@+id/nav_host_fragment"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/nav_host_fragment"
+        app:layout_constraintTop_toBottomOf="@+id/searchText"
+        app:layout_constraintVertical_bias="0.611" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
