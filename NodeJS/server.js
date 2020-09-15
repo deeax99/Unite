@@ -18,6 +18,13 @@ express_server.get("/", (req, res)=>{
     res.end("hello cleint");
 })
 
+function isAuth(userToCheck){
+    return new Promise((resolve, reject)=>{
+        Ovalidate.exist(user, userToCheck).then((result)=>{
+            resolve(result['result']);
+        })
+    })
+}
 
 express_server.post("/login", (req, res)=>{
     
@@ -80,7 +87,7 @@ function changefollow(email, userToAdd){
                         })
                     }else{
                         Ovalidate.get(userFollwers, {email: email}).then((userFollwersObject)=>{
-                            userFollwersObject = userFollwersObject.user;
+                            userFollwersObject = userFollwersObject.object;
                             var findOne = userFollwersObject.followers.indexOf(userToAdd.email);
                             if(findOne == -1)
                             {
@@ -110,7 +117,92 @@ function changefollow(email, userToAdd){
 }
 
 express_server.post("/insertPost", (req, res)=>{
-    //todo
+    
+    var email = req.body['email'];
+    var hash = req.body['hash'];
+    var realPost = {
+        numberOfUsers: req.body['numberOfUsers'],
+        participants: [],
+        auther: email,
+        place: req.body['place'],
+        date: req.body['date'],
+        description: req.body['description'],
+        location: req.body['location'],
+        state: true
+    }
+    
+    isAuth({email: email, loged: hash}).then((ans)=>{
+        if(ans == false){
+            res.send({
+                result: false,
+                resone: 'you are not loged',
+            })
+        }else{
+            Ovalidate.add(post, realPost).then((result)=>{
+                res.send(result);
+            })
+        }
+    })
+
+
+
+})
+
+function changeParti(email, postID){
+    return new Promise((resolve, reject)=>{
+        Ovalidate.get(post, {_id: postID}).then((result)=>{
+            if(result['result'] === false){
+                resolve({
+                    result: false,
+                    resone: 'there is no post with this id',
+                })
+            }else{
+            
+                var currentPost = result.object;
+                var findOne = currentPost.participants.indexOf(email);
+                if(findOne == -1)
+                    currentPost.participants.push(email);
+                else
+                    currentPost.participants.splice(findOne, 1);
+                console.log(currentPost.participants);
+                Ovalidate.modify(post, {_id: postID}, currentPost).then((ans)=>{
+                    if(ans['result'] === false){
+                        resolve({
+                            result: false,
+                            resone: 'cant modify post participants array',
+                        })
+                    }else{
+                        resolve({
+                            result: true,
+                            resone: '',
+                        })
+                    }
+                })
+            }
+        })
+    })
+    
+}
+
+express_server.post('/participants', (req, res)=>{
+    
+    var email = req.body['email'];
+    var hash = req.body['hash'];
+    var postID = req.body['postID'];
+
+    isAuth({email: email, loged: hash}).then((ans)=>{
+        if(ans == false){
+            res.send({
+                result: false,
+                resone: 'you are not loged',
+            })
+        }else{
+
+            changeParti(email, postID).then((result)=>{res.send(result)});
+            
+        }
+    })
+
 })
 
 express_server.post("/editPost", (req, res)=>{
@@ -118,23 +210,26 @@ express_server.post("/editPost", (req, res)=>{
 })
 
 
+
+
 //this function can change the folloing state
 express_server.post("/follow", (req, res)=>{
+
     var email = req.body['email'];
     var hash = req.body['hash'];
     var userToAdd = {email: req.body['user']};
 
-    console.log(req.body)
-    Ovalidate.exist(user, {email: email, loged: hash}).then((result)=>{
-        if(result['result'] === false){
+    isAuth({email: email, loged: hash}).then((ans)=>{
+        if(ans == false){
             res.send({
                 result: false,
-                resone: 'you are not loged in',
+                resone: 'you are not loged',
             })
         }else{
             changefollow(email, userToAdd).then((result)=>res.send(result));
         }
     })
+
 })
 
 

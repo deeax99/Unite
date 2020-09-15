@@ -59,7 +59,7 @@ class Operations{
                 }else{
                     resolve({
                         result: true,
-                        user: result,
+                        object: result,
                         resone: '',
                     })
                 }
