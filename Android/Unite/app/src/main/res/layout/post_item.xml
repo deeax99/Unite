@@ -28,15 +28,15 @@
                 android:layout_marginLeft="80dp"
                 android:layout_marginBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/image"
+                app:layout_constraintEnd_toEndOf="@+id/item_image"
                 app:layout_constraintHorizontal_bias="0.151"
                 app:layout_constraintStart_toEndOf="@+id/item_name"
-                app:layout_constraintTop_toBottomOf="@+id/image"
+                app:layout_constraintTop_toBottomOf="@+id/item_image"
                 app:layout_constraintVertical_bias="0.416"
                 app:srcCompat="@drawable/person24px" />
 
             <ImageView
-                android:id="@+id/image"
+                android:id="@+id/item_image"
                 android:layout_width="311dp"
                 android:layout_height="146dp"
                 android:foreground="@drawable/rounded_image"
@@ -58,7 +58,7 @@
                 android:text="TextView"
                 android:textColor="@color/design_default_color_background"
                 app:layout_constraintBottom_toTopOf="@+id/item_description"
-                app:layout_constraintStart_toStartOf="@+id/image" />
+                app:layout_constraintStart_toStartOf="@+id/item_image" />
 
             <TextView
                 android:id="@+id/item_description"
@@ -80,7 +80,7 @@
                 android:text="TextView"
                 android:textColor="@color/card_text_color"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/image"
+                app:layout_constraintEnd_toEndOf="@+id/item_image"
                 app:layout_constraintHorizontal_bias="0.238"
                 app:layout_constraintStart_toEndOf="@+id/person" />
         </androidx.constraintlayout.widget.ConstraintLayout>
