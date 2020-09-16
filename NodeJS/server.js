@@ -307,7 +307,7 @@ express_server.post("/editPost", (req, res)=>{
 })
 
 //note that by defulte the host is your ip in your router
-const port = 80;
+const port = 9000;
 express_server.listen(port, ()=>{
     console.log("listening...");
 })
