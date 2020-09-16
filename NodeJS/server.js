@@ -208,7 +208,7 @@ function getPost(postStart){
 
     return new Promise((resolve, reject)=>{
 
-        Ovalidate.getFrom(postStart).then((resul)=>resolve(result));
+        Ovalidate.getFrom(post, postStart).then((result)=>resolve(result));
 
     })
 
