@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
 const Schema = new schema({
+    name: String,
     numberOfUsers: Number,
     participants: [String],
     auther: String,

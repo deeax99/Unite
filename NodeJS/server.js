@@ -66,6 +66,7 @@ express_server.post("/register", (req, res)=>
 
 express_server.post("/login", (req, res)=>
 {
+    
     var email = req.body["email"];
     var password = validate.Hash128(req.body["password"]);
     console.log(email, password);
@@ -85,11 +86,15 @@ express_server.post("/login", (req, res)=>
                         resone: "something wrong"
                     })
                 }else{
-                    res.send({
-                        result: true,
-                        hash: hash,
-                        resone: ""
-                    })
+                    Ovalidate.get(user, {email: email}).then((ans)=>[
+                        res.send({
+                            result: true,
+                            hash: hash,
+                            username: ans['object'].username,
+                            resone: ""
+                        })
+                    ])
+                    
                 }
             })   
         }
