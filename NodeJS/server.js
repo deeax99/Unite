@@ -30,6 +30,7 @@ express_server.post("/login", (req, res)=>{
     
     var email = req.body["email"];
     var password = req.body["password"];
+    console.log(email, password);
     Ovalidate.exist(user, {email: email, password: password}).then((result)=>{
         if(result["result"] === false)
             res.send({
