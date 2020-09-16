@@ -67,6 +67,20 @@ class Operations{
         })
     }
 
+    getFrom(collection, startFrom){
+
+        return new Promise((resolve, reject)=>{
+            collection.find({state: true}).sort({_id:1}).skip(parseInt(startFrom, 10)).limit(5).then((result)=>{
+                resolve({
+                    result: true,
+                    content: result,
+                    resone: ""
+                })
+            })
+        })
+
+    }
+
 }
 
 module.exports = Operations
