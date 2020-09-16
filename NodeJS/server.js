@@ -160,6 +160,7 @@ express_server.post("/insertPost", (req, res)=>{
     var email = req.body['email'];
     var hash = req.body['hash'];
     var realPost = {
+        name: req.body['name'],
         numberOfUsers: req.body['numberOfUsers'],
         participants: [],
         auther: email,
