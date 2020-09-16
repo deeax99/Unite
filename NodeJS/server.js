@@ -26,10 +26,48 @@ function isAuth(userToCheck){
     })
 }
 
-express_server.post("/login", (req, res)=>{
-    
+express_server.post("/register", (req, res)=>
+{
+    var body = req.body;
+    if (!validate.EmailValidatoinCheck(body["email"]))
+    {
+        res.send({result : false ,reason : "email format not valid" })
+    }
+    else if (!validate.StrongPassword(body["password"]))
+    {
+        res.send({result : false ,reason : "password is weak" })
+    }
+    else
+    {
+        var registerData = {email : body["email"] ,username : body["username"] };
+        Ovalidate.exist(user , registerData).then( (result)=>
+        {
+            if (result["result"] == false)
+            {
+                var registerDBData = {
+                                    email : body["email"] ,
+                                    password : validate.Hash128(body["password"]) ,
+                                    username : body["username"] ,
+                                    birthDate : body["birthDate"]};
+
+                Ovalidate.add(user , registerDBData).then((result) =>
+                {
+                    res.send(result);
+                })
+            }
+            else 
+            {
+                res.send({result : false ,reason : "username or email is exist" })
+            }
+        })
+               
+    }
+})
+
+express_server.post("/login", (req, res)=>
+{
     var email = req.body["email"];
-    var password = req.body["password"];
+    var password = validate.Hash128(req.body["password"]);
     console.log(email, password);
     Ovalidate.exist(user, {email: email, password: password}).then((result)=>{
         if(result["result"] === false)
@@ -268,7 +306,7 @@ express_server.post("/editPost", (req, res)=>{
 })
 
 //note that by defulte the host is your ip in your router
-const port = 3214;
+const port = 80;
 express_server.listen(port, ()=>{
     console.log("listening...");
 })

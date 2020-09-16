@@ -10,7 +10,8 @@ module.exports = class
 
     StrongPassword (password)
     {
-        return passwordStrength(password).id != 0
+        return password.length > 7;
+        return passwordStrength().id != 0
     }
 
     post(object)
