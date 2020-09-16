@@ -157,7 +157,6 @@ function changeParti(email, postID){
                     resone: 'there is no post with this id',
                 })
             }else{
-            
                 var currentPost = result.object;
                 var findOne = currentPost.participants.indexOf(email);
                 if(findOne == -1)
@@ -199,6 +198,37 @@ express_server.post('/participants', (req, res)=>{
         }else{
 
             changeParti(email, postID).then((result)=>{res.send(result)});
+            
+        }
+    })
+
+})
+
+function getPost(postStart){
+
+    return new Promise((resolve, reject)=>{
+
+        Ovalidate.getFrom(postStart).then((resul)=>resolve(result));
+
+    })
+
+}
+
+express_server.post("/getPost", (req, res)=>{
+
+    var email = req.body['email'];
+    var hash = req.body['hash'];
+    var postStart = req.body['postStart'];
+
+    isAuth({email: email, loged: hash}).then((ans)=>{
+        if(ans == false){
+            res.send({
+                result: false,
+                resone: 'you are not loged',
+            })
+        }else{
+
+            getPost(postStart).then((result)=>{res.send(result)});
             
         }
     })
