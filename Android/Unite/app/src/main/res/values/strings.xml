@@ -15,14 +15,10 @@ Sign in to continue
     <string-array name="items">
         <item>cleaning neighborhood</item>
         <item>planting tree</item>
-
-
     </string-array>
 
     <string-array name="description">
         <item>description</item>
         <item>description</item>
-
-
     </string-array>
 </resources>

@@ -29,13 +29,14 @@ public class postsAdapter extends RecyclerView.Adapter<postViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull postViewHolder holder, int position) {
-        holder.item_name.setText(items[position]);
-        holder.item_description.setText(description[position]);
+        holder.name.setText(items[position]);
+        holder.description.setText(description[position]);
         holder.item_image.setImageResource(images[position]);
     }
 
     @Override
     public int getItemCount() {
-        return items.length;
+
+        return images.length;
     }
 }
