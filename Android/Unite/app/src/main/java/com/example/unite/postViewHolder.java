@@ -8,14 +8,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 class postViewHolder extends RecyclerView.ViewHolder {
-    TextView item_name,item_description,item_participants;
+    TextView name,description;
     ImageView item_image;
 
     public postViewHolder(@NonNull View itemView) {
         super(itemView);
-        item_name=itemView.findViewById(R.id.item_name);
-        item_description=itemView.findViewById(R.id.item_description);
-        item_participants=itemView.findViewById(R.id.item_participants);
+        name=itemView.findViewById(R.id.item_name);
+        description=itemView.findViewById(R.id.item_description);
+
         item_image=itemView.findViewById(R.id.item_image);
     }
 }
